@@ -135,6 +135,23 @@ function App() {
           <img src="icon.png" className="w-4" />
           World View
         </h1>
+        <input
+          type="text"
+          className="bg-white text-black rounded-xl p-2"
+          placeholder="Find a country..."
+          list="countries-list"
+          onChange={(e) => {
+            const svg = svgRef.current;
+            if (!svg) return;
+            setCountryName(e.target.value);
+            paintByName(svg, e.target.value, "green");
+          }}
+        />
+        <datalist id="countries-list">
+          {countries.map((c) => (
+            <option key={c.name} value={c.name} />
+          ))}
+        </datalist>
         <ul className="flex justify-end gap-8">
           <li className="cursor-pointer hover:underline">
             <a href="/quiz" className="flex items-center gap-1">

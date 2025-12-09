@@ -46,7 +46,7 @@ export const anthemsList = [
   "el_salvador.mp3",
   "equatorial_guinea.mp3",
   "estonia.mp3",
-  "ethopia.mp3",
+  "ethiopia.mp3",
   "fiji.mp3",
   "finland.mp3",
   "france.mp3",
