@@ -1,3 +1,5 @@
+import stringSimilarity from "string-similarity";
+
 export const anthemsList = [
   "afghanistan.mp3",
   "albania.mp3",
@@ -154,9 +156,9 @@ export const anthemsList = [
   "tuvalu.mp3",
   "uganda.mp3",
   "ukraine.mp3",
-  "united-a.mp3",
-  "united-k.mp3",
-  "united-s.mp3",
+  "united_arab_emirates.mp3",
+  "united_kingdom.mp3",
+  "united_states.mp3",
   "uruguay.mp3",
   "vanuatu.mp3",
   "vatican.mp3",
@@ -171,25 +173,9 @@ export const anthemsList = [
 ];
 
 export const getCloserAnthem = (country: string) => {
-  const parts = country
-    .toLowerCase()
-    .replaceAll("(", "")
-    .replaceAll(")", "")
-    .split(" ")
-    .filter(Boolean);
-
-  let bestMatch: string | undefined = undefined;
-  let maxMatchedParts = 0;
-
-  for (const anthem of anthemsList) {
-    const anthemLower = anthem.toLowerCase();
-    const matchedParts = parts.filter(part => anthemLower.includes(part)).length;
-
-    if (matchedParts > maxMatchedParts) {
-      maxMatchedParts = matchedParts;
-      bestMatch = anthem;
-    }
-  }
-
-  return bestMatch;
+  const normalizedCountry = country.toLowerCase().replace(/\s+/g, "_");
+  console.log(normalizedCountry);
+  const normalizedAnthems = anthemsList.map(a => a.toLowerCase());
+  const { bestMatch } = stringSimilarity.findBestMatch(normalizedCountry, normalizedAnthems);
+  return bestMatch ? bestMatch.target : undefined;
 };
