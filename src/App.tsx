@@ -6,6 +6,7 @@ import { fetchComment } from "./requests/pollinations";
 import Spinner from "./components/Spinner";
 import { BsCheck2Square, BsGithub } from "react-icons/bs";
 import { countries } from "./data/countries";
+import { getCloserAnthem } from "./data/anthems";
 
 type CardContentEntry = {
   name: string;
@@ -59,8 +60,20 @@ function App() {
     queryFn: () => fetchComment(`Make a comment about the political system of ${countryName}, constitutional form and predominant religion, culture and the biggest problem the country suffers from. Also tells if the country was colonized and by whom. Be short. Do not say anything besides the comment. Write everything in ${language}.`),
     retry: 1,
   });
-
   const countryData = countries.find(c => c.name == countryName);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    if (!countryName) return;
+
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      audioRef.current.src = `/anthems/${getCloserAnthem(countryName)}`;
+      audioRef.current.load();
+    }
+  }, [countryName]);
+
 
   useEffect(() => {
     if (!countryName) return
@@ -150,6 +163,7 @@ function App() {
           </li>
         </ul>
       </nav>
+
       <ZoomableSvg>
         <WorldSvg svgRef={svgRef} onClick={handleSvgClick} />
       </ZoomableSvg>
@@ -161,6 +175,10 @@ function App() {
           countryData && (
             <div>
               <img src={`${countryData.flags.svg}`} alt="Country flag" className="w-1/2 block mx-auto" />
+              <audio ref={audioRef} className="mt-3" controls>
+                <source src="" type="audio/mp3" />
+                Your browser does not support the audio element.
+              </audio>
               <ul className="mt-3">
                 <li>
                   <span>{cardContent[language].name}: </span>
@@ -219,7 +237,6 @@ function App() {
                   ))}
                 </li>
               </ul>
-
             </div>
           )
         }
