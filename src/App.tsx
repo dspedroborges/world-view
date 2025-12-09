@@ -134,6 +134,19 @@ function App() {
               Github
             </a>
           </li>
+          <li>
+            {
+              language == "Portuguese" ? (
+                <button onClick={() => setLanguage("English")} className="cursor-pointer hover:underline">
+                  🇧🇷 Português
+                </button>
+              ) : (
+                <button onClick={() => setLanguage("Portuguese")} className="cursor-pointer hover:underline">
+                  🇺🇸 English
+                </button>
+              )
+            }
+          </li>
         </ul>
       </nav>
       <ZoomableSvg>
@@ -222,19 +235,8 @@ function App() {
           )
         }
       </div>
-      <footer className="fixed bottom-0 w-full bg-neutral-800 px-4 py-2 text-white flex flex-col lg:flex-row lg:justify-between z-50">
+      <footer className="fixed bottom-0 w-full bg-neutral-800 px-4 py-2 text-white flex justify-center z-50">
         <p>{language == "Portuguese" ? "feito por" : "made by"} Pedro Borges &copy; {new Date().getFullYear()}</p>
-        {
-          language == "Portuguese" ? (
-            <button onClick={() => setLanguage("English")} className="cursor-pointer hover:underline">
-              🇧🇷 Português
-            </button>
-          ) : (
-            <button onClick={() => setLanguage("Portuguese")} className="cursor-pointer hover:underline">
-              🇺🇸 English
-            </button>
-          )
-        }
       </footer>
     </div>
   )
