@@ -1,5 +1,5 @@
 export const fetchCountry = async (name: string) => {
-  const base = import.meta.env.VITE_API_URL;
+  const base = import.meta.env.VITE_COUNTRIES_API_URL;
   const url = `${base}/name/${encodeURIComponent(name)}`;
 
   const res = await fetch(url);
