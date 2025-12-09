@@ -3,9 +3,9 @@ import WorldSvg from "./components/WorldSvg";
 import ZoomableSvg from "./components/ZoomableSvg";
 import { useQuery } from "@tanstack/react-query";
 import { fetchComment } from "./requests/pollinations";
-import { fetchCountry } from "./requests/countries";
 import Spinner from "./components/Spinner";
 import { BsCheck2Square, BsGithub } from "react-icons/bs";
+import { countries } from "./data/countries";
 
 type CardContentEntry = {
   name: string;
@@ -58,17 +58,12 @@ function App() {
     enabled: false,
     queryFn: () => fetchComment(`Make a comment about the political system of ${countryName}, constitutional form and predominant religion, culture and the biggest problem the country suffers from. Also tells if the country was colonized and by whom. Be short. Do not say anything besides the comment. Write everything in ${language}.`),
   });
-  const country = useQuery({
-    queryKey: ["countryData", countryName],
-    queryFn: () => fetchCountry(countryName),
-    enabled: false
-  });
-  const countryData = country.data?.[0];
+
+  const countryData = countries.find(c => c.name == countryName);
 
   useEffect(() => {
     if (!countryName) return
     comment.refetch()
-    country.refetch()
   }, [countryName]);
 
   function paintByName(svg: SVGSVGElement, key: string, color: string) {
@@ -117,7 +112,7 @@ function App() {
   return (
     <div className="bg-blue-100 max-h-screen w-full overflow-hidden">
       {
-        comment.isLoading || country.isLoading && (
+        comment.isLoading && (
           <Spinner />
         )
       }
@@ -192,7 +187,7 @@ function App() {
 
                 <li>
                   <span>{cardContent[language].languages}: </span>
-                  {countryData.languages.map((l: Record<string, string>, i: number) => (
+                  {countryData.languages?.map((l, i: number) => (
                     <span key={i} className="font-bold">
                       {l.name}
                       {countryData.languages.length > 1 && i !== countryData.languages.length - 1 && ", "}
@@ -202,7 +197,7 @@ function App() {
 
                 <li>
                   <span>{cardContent[language].currencies}: </span>
-                  {countryData.currencies.map((c: Record<string, string>, i: number) => (
+                  {countryData.currencies?.map((c, i: number) => (
                     <span key={i} className="font-bold">
                       {c.name} ({c.symbol})
                       {countryData.currencies.length > 1 && i !== countryData.currencies.length - 1 && ", "}
