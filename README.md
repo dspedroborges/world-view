@@ -8,7 +8,7 @@
 
 <img src="print.png" alt="Example image">
 
-> World View is an web app that allows the user to learn about the countries of the world, by clicking on their position on the map. There's also a quiz mode.
+> World View is an web app that uses LLM and allows the user to learn about the countries of the world by clicking on their position on the map.
 
 ### Adjustments and improvements
 
