@@ -57,6 +57,7 @@ function App() {
     queryKey: ["countryComment", countryName],
     enabled: false,
     queryFn: () => fetchComment(`Make a comment about the political system of ${countryName}, constitutional form and predominant religion, culture and the biggest problem the country suffers from. Also tells if the country was colonized and by whom. Be short. Do not say anything besides the comment. Write everything in ${language}.`),
+    retry: 1,
   });
 
   const countryData = countries.find(c => c.name == countryName);
@@ -230,7 +231,7 @@ function App() {
         }
 
         {
-          !comment.isLoading && (
+          (!comment.isLoading && !comment.isError) && (
             <p className="mt-4">{comment.data}</p>
           )
         }
