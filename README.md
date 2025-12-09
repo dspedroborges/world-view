@@ -43,6 +43,12 @@ To use it locally, follow these steps:
 npm run dev
 ```
 
+## Env
+
+```
+VITE_COUNTRIES_API_URL="/api-countries"
+```
+
 ## Live Demo
 
 You can try it live at: [Live Demo](https://worldviewproject.vercel.app/)
