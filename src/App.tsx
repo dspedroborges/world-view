@@ -6,7 +6,6 @@ import { fetchComment } from "./requests/pollinations";
 import Spinner from "./components/Spinner";
 import { BsCheck2Square, BsGithub, BsInfo, BsXCircle } from "react-icons/bs";
 import { countries } from "./data/countries";
-import { getCloserAnthem } from "./data/anthems";
 
 type CardContentEntry = {
   name: string;
@@ -56,7 +55,7 @@ function App() {
   const [language, setLanguage] = useState<"Portuguese" | "English">("English");
   const [showInfo, setShowInfo] = useState(true);
   const comment = useQuery({
-    queryKey: ["countryComment", countryName],
+    queryKey: ["countryComment", countryName, language],
     enabled: false,
     queryFn: () => fetchComment(`Make a comment about the political system of ${countryName}, constitutional form and predominant religion, culture and the biggest problem the country suffers from. Also tells if the country was colonized and by whom. Be short. Do not say anything besides the comment. Write everything in ${language}.`),
     retry: 1,
@@ -70,7 +69,7 @@ function App() {
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
-      audioRef.current.src = `/anthems/${getCloserAnthem(countryName)}`;
+      audioRef.current.src = `/anthems/${countryData?.alpha2Code}.mp3`;
       audioRef.current.load();
     }
   }, [countryName]);
