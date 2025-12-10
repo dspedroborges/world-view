@@ -66,13 +66,25 @@ function App() {
 
   useEffect(() => {
     if (!countryName) return;
+    if (!audioRef.current) return;
 
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-      audioRef.current.src = `/anthems/${countryData?.alpha2Code}.mp3`;
-      audioRef.current.load();
-    }
+    const audio = audioRef.current;
+    const alpha2 = countryData?.alpha2Code;
+    if (!alpha2) return;
+
+    const tryLoad = (ext: string) => {
+      return new Promise<void>((resolve, reject) => {
+        audio.src = `/anthems/${alpha2}.${ext}`;
+        audio.load();
+        audio.oncanplaythrough = () => resolve();
+        audio.onerror = () => reject();
+      });
+    };
+
+    audio.pause();
+    audio.currentTime = 0;
+
+    tryLoad("mp3").catch(() => tryLoad("ogg"));
   }, [countryName]);
 
 
