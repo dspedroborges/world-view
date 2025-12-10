@@ -60,7 +60,8 @@ function App() {
     queryFn: () => fetchComment(`Make a comment about the political system of ${countryName}, constitutional form and predominant religion, culture and the biggest problem the country suffers from. Also tells if the country was colonized and by whom. Be short. Do not say anything besides the comment. Write everything in ${language}.`),
     retry: 1,
   });
-  const countryData = countries.find(c => c.name == countryName);
+  const countryData = countries.find(c => c.altSpellings?.includes(countryName) || c.name == countryName || c.nativeName == countryName);
+  console.log(countryData);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -76,6 +77,7 @@ function App() {
 
 
   useEffect(() => {
+    console.log(countryName);
     if (!countryName) return
     comment.refetch()
   }, [countryName]);
@@ -203,6 +205,7 @@ function App() {
                   <img src={`${countryData.flags.svg}`} alt="Country flag" className="w-1/2 block mx-auto" />
                   <audio ref={audioRef} className="mt-3" controls>
                     <source src="" type="audio/mp3" />
+                    <source src="" type="audio/ogg" />
                     Your browser does not support the audio element.
                   </audio>
                   <ul className="mt-3">
