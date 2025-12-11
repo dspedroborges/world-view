@@ -1,11 +1,13 @@
-import { BsCheck2Square, BsGithub, BsHouse, BsInfo } from "react-icons/bs";
+import { BsCheck2Square, BsGithub, BsHouse, BsInfo, BsSearch } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useLanguageStore } from "../stores/language";
+import { useState } from "react";
 
 export default function Nav(
     { setCountryName, dataList, setShowInfo, showInfo }:
         { setCountryName: Function, dataList: string[], setShowInfo: Function, showInfo: boolean }
 ) {
+    const [searchParam, setSearchParam] = useState("");
     const language = useLanguageStore((s) => s.language);
     const setLanguage = useLanguageStore((s) => s.setLanguage);
 
@@ -18,15 +20,22 @@ export default function Nav(
             {
                 dataList.length > 0 && (
                     <>
-                        <input
-                            type="text"
-                            className="bg-white text-black rounded-xl p-2"
-                            placeholder={`${language == "pt" ? "Ache um país..." : "Find a country..."}`}
-                            list="countries-list"
-                            onChange={(e) => {
-                                setCountryName(e.target.value);
-                            }}
-                        />
+                        <form onSubmit={(e) => {
+                            e.preventDefault();
+                            setCountryName(searchParam);
+                        }}>
+                            <div className="bg-white text-black rounded-xl p-2 flex items-center gap-2">
+                                <BsSearch />
+                                <input
+                                    type="text"
+                                    className="focus:outline-0 text-center"
+                                    placeholder={`${language == "pt" ? "Ache um país..." : "Find a country..."}`}
+                                    list="countries-list"
+                                    onChange={(e) => setSearchParam(e.target.value)}
+                                    value={searchParam}
+                                />
+                            </div>
+                        </form>
                         <datalist id="countries-list">
                             {dataList.map((c) => (
                                 <option key={c} value={c} />

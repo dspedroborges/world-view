@@ -71,7 +71,7 @@ export default function Card({
                         className="w-full block mx-auto"
                     />
                     <audio ref={audioRef} className="mt-3 w-full" controls>
-                        <source src={undefined} type="audio/mp3" />
+                        <source src={"/anthems/BR.mp3"} type="audio/mp3" />
                         <source src={undefined} type="audio/ogg" />
                         Your browser does not support the audio element.
                     </audio>

@@ -29,11 +29,16 @@ export default function Home() {
 
   useEffect(() => {
     if (!countryName) return;
-    if (!audioRef.current) return;
     if (!svgRef.current) return;
 
     paintByName(svgRef.current, countryData?.name ?? "", "green");
     setShowInfo(true);
+  }, [countryName]);
+
+  useEffect(() => {
+    if (!countryName) return;
+    if (!audioRef.current) return;
+    if (!svgRef.current) return;
 
     const audio = audioRef.current;
     const alpha2 = countryData?.alpha2Code;
