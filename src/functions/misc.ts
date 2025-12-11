@@ -8,6 +8,7 @@ export const getListOfCountries = (): string[] => {
     const set = new Set();
     for (const country of countries) {
       set.add(country.name);
+      set.add(country.nativeName);
       if (country.altSpellings) {
         country.altSpellings.forEach(sp => set.add(sp));
       }
