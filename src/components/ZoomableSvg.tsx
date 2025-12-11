@@ -6,6 +6,7 @@ export default function ZoomableSvg({ children }: { children: ReactNode }) {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [dragging, setDragging] = useState(false);
   const [start, setStart] = useState({ x: 0, y: 0 });
+  const [pinchStart, setPinchStart] = useState<{ distance: number; scale: number } | null>(null);
 
   const handleWheel = (e: React.WheelEvent) => {
     e.preventDefault();
@@ -27,6 +28,41 @@ export default function ZoomableSvg({ children }: { children: ReactNode }) {
     setDragging(false);
   };
 
+  const getDistance = (touches: TouchList | any) => {
+    if (touches.length < 2) return 0;
+    const dx = touches[0].clientX - touches[1].clientX;
+    const dy = touches[0].clientY - touches[1].clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 1) {
+      setDragging(true);
+      setStart({ x: e.touches[0].clientX - offset.x, y: e.touches[0].clientY - offset.y });
+    } else if (e.touches.length === 2) {
+      const distance = getDistance(e.touches);
+      setPinchStart({ distance, scale });
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length === 1 && dragging) {
+      setOffset({
+        x: e.touches[0].clientX - start.x,
+        y: e.touches[0].clientY - start.y,
+      });
+    } else if (e.touches.length === 2 && pinchStart) {
+      const distance = getDistance(e.touches);
+      const nextScale = (distance / pinchStart.distance) * pinchStart.scale;
+      setScale(Math.max(0.3, Math.min(nextScale, 8)));
+    }
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (e.touches.length < 2) setPinchStart(null);
+    if (e.touches.length === 0) setDragging(false);
+  };
+
   return (
     <div
       ref={containerRef}
@@ -34,6 +70,10 @@ export default function ZoomableSvg({ children }: { children: ReactNode }) {
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
       className="w-screen h-screen overflow-hidden"
       style={{ cursor: dragging ? 'grabbing' : 'grab' }}
     >
