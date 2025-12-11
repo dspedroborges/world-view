@@ -141,7 +141,7 @@ export default function Card({
                     </ul>
                 </div>
             ) : countryName === "" ? (
-                <p>Click on a country to get the info.</p>
+                <p className="p-4 text-center animate-pulse">Click on a country to get the info.</p>
             ) : null}
 
             {!comment.isLoading && !comment.isError && <p className="mt-4 p-4">{comment.data}</p>}
