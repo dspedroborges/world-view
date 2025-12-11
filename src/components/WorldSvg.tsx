@@ -1,6 +1,6 @@
 type Props = {
     svgRef: React.Ref<SVGSVGElement>;
-    onClick: (e: React.MouseEvent<SVGSVGElement>) => void;
+    onClick?: (e: React.MouseEvent<SVGSVGElement>) => void;
 }
 
 export default function WorldSvg({ svgRef, onClick }: Props) {
