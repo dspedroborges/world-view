@@ -11,6 +11,8 @@ export const cardContent: CardContent = {
     gini: "Desigualdade Social (Gini)",
     languages: "Idiomas",
     currencies: "Moedas",
+    area: "Área",
+    population: "População"
   },
   "en": {
     name: "Name",
@@ -22,5 +24,7 @@ export const cardContent: CardContent = {
     gini: "Social Inequality (Gini)",
     languages: "Languages",
     currencies: "Currencies",
+    area: "Area",
+    population: "Population"
   }
 }

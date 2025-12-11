@@ -20,7 +20,11 @@ export default function Quiz() {
 
     const paintRandomCountry = () => {
         if (!svgRef.current) return;
-        const randomNumber = getRandomNumber(countries.length - 1);
+        let randomNumber = 0, area = 0;
+        do {
+            randomNumber = getRandomNumber(countries.length - 1);
+             area = countries[randomNumber].area ?? 0;
+        } while(area < 5000);
         setRandomCountry(randomNumber);
         paintByName(svgRef.current, countries[randomNumber].name, "red");
     }

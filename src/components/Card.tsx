@@ -25,6 +25,7 @@ interface Country {
     cioc?: string;
     independent?: boolean;
     gini?: number;
+    timezones: string[]
 }
 
 
@@ -52,7 +53,7 @@ export default function Card({
     comment,
 }: CardProps) {
     return (
-        <div className="fixed top-1/2 lg:top-1/2 -translate-y-1/2 h-1/2 overflow-y-scroll border-4 lg:left-2 bg-neutral-200/80 shadow-2xl w-full md:w-[350px] text-neutral-800 rounded-b-xl">
+        <div className="fixed top-1/2 lg:top-1/2 -translate-y-1/2 h-2/3 overflow-y-scroll border-4 lg:left-2 bg-neutral-200/80 shadow-2xl w-full md:w-[350px] text-neutral-800 rounded-b-xl">
             <div className="p-2 mb-4 bg-neutral-800 text-white w-full flex justify-center items-center sticky top-0 z-40">
                 <h3 className="text-center font-bold text-xl w-[90%]">Info</h3>
                 <BsXCircle
@@ -67,18 +68,18 @@ export default function Card({
                     <img
                         src={countryData.flags.svg}
                         alt="Country flag"
-                        className="w-1/2 block mx-auto"
+                        className="w-full block mx-auto"
                     />
-                    <audio ref={audioRef} className="mt-3" controls>
-                        <source src="" type="audio/mp3" />
-                        <source src="" type="audio/ogg" />
+                    <audio ref={audioRef} className="mt-3 w-full" controls>
+                        <source src={undefined} type="audio/mp3" />
+                        <source src={undefined} type="audio/ogg" />
                         Your browser does not support the audio element.
                     </audio>
 
                     <ul className="mt-3">
                         <li>
                             <span>{cardContent[language].name}: </span>
-                            <span className="font-bold">{countryName}</span>
+                            <span className="font-bold">{countryName} ({countryData.nativeName})</span>
                         </li>
                         <li>
                             <span>{cardContent[language].capital}: </span>
@@ -91,6 +92,14 @@ export default function Card({
                         <li>
                             <span>{cardContent[language].region}: </span>
                             <span className="font-bold">{countryData.region}</span>
+                        </li>
+                        <li>
+                            <span>{cardContent[language].area}: </span>
+                            <span className="font-bold">{countryData.area} km²</span>
+                        </li>
+                        <li>
+                            <span>{cardContent[language].population}: </span>
+                            <span className="font-bold">{countryData.population}</span>
                         </li>
                         <li>
                             <span>{cardContent[language].demonym}: </span>
@@ -139,12 +148,13 @@ export default function Card({
                             )
                         }
                     </ul>
+                    <p className="text-center italic mt-3">{countryData.topLevelDomain} | +{countryData.callingCodes} | {countryData.timezones.join(", ")}</p>
                 </div>
             ) : countryName === "" ? (
                 <p className="p-4 text-center animate-pulse">Click on a country to get the info.</p>
             ) : null}
 
-            {!comment.isLoading && !comment.isError && <p className="mt-4 p-4">{comment.data}</p>}
+            {!comment.isLoading && !comment.isError && <p className="p-4 bg-green-800 text-white">{comment.data}</p>}
         </div>
     );
 }

@@ -8,6 +8,8 @@ export type CardContentEntry = {
   gini: string;
   languages: string;
   currencies: string;
+  area: string;
+  population: string;
 };
 
 export type CardContent = {

@@ -30,25 +30,26 @@ export default function Home() {
   useEffect(() => {
     if (!countryName) return;
     if (!audioRef.current) return;
-    const svg = svgRef.current;
-    if (!svg) return;
-    paintByName(svg, countryData?.name ?? "", "green");
+    if (!svgRef.current) return;
+
+    paintByName(svgRef.current, countryData?.name ?? "", "green");
 
     const audio = audioRef.current;
     const alpha2 = countryData?.alpha2Code;
     if (!alpha2) return;
 
-    const tryLoad = (ext: string) => {
-      return new Promise<void>((resolve, reject) => {
-        audio.src = `/anthems/${alpha2}.${ext}`;
+    audio.pause();
+    audio.currentTime = 0;
+
+    const tryLoad = (ext: string) =>
+      new Promise<void>((resolve, reject) => {
+        const src = `/anthems/${alpha2}.${ext}`;
+        audio.src = src;
         audio.load();
+
         audio.oncanplaythrough = () => resolve();
         audio.onerror = () => reject();
       });
-    };
-
-    audio.pause();
-    audio.currentTime = 0;
 
     tryLoad("mp3").catch(() => tryLoad("ogg"));
   }, [countryName]);
@@ -70,7 +71,7 @@ export default function Home() {
         setCountryName={setCountryName}
         dataList={getListOfCountries()}
         setShowInfo={setShowInfo}
-        showInfo={showInfo} 
+        showInfo={showInfo}
       />
 
       <ZoomableSvg>
