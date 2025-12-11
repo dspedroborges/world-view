@@ -14,9 +14,8 @@
 
 The project is still in development and the next updates are directed to the following tasks:
 
-- [ ] Translate the values of the returned json from Countries API
 - [ ] Highlight regions and subregions
-- [ ] Quiz mode
+- [x] Quiz mode
 
 ## Prerequisites
 
