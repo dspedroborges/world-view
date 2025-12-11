@@ -33,6 +33,7 @@ export default function Home() {
     if (!svgRef.current) return;
 
     paintByName(svgRef.current, countryData?.name ?? "", "green");
+    setShowInfo(true);
 
     const audio = audioRef.current;
     const alpha2 = countryData?.alpha2Code;
