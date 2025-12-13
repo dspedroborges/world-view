@@ -148,7 +148,7 @@ export default function Card({
                             )
                         }
                     </ul>
-                    <p className="text-center italic mt-3">{countryData.topLevelDomain} | +{countryData.callingCodes} | {countryData.timezones.join(", ")}</p>
+                    <p className="text-center italic mt-3">{countryData.alpha2Code} | {countryData.alpha3Code} | {countryData.topLevelDomain} | +{countryData.callingCodes} | {countryData.timezones.join(", ")}</p>
                 </div>
             ) : countryName === "" ? (
                 <p className="p-4 text-center animate-pulse">Click on a country to get the info.</p>
