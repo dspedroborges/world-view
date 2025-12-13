@@ -9,6 +9,7 @@ import { BsSend } from "react-icons/bs";
 import { Toaster } from 'sonner';
 import { toast } from 'sonner';
 import { useLanguageStore } from "../stores/language";
+import Footer from "../components/Footer";
 
 export default function Quiz() {
     const svgRef = useRef<SVGSVGElement | null>(null);
@@ -23,8 +24,8 @@ export default function Quiz() {
         let randomNumber = 0, area = 0;
         do {
             randomNumber = getRandomNumber(countries.length - 1);
-             area = countries[randomNumber].area ?? 0;
-        } while(area < 5000);
+            area = countries[randomNumber].area ?? 0;
+        } while (area < 5000);
         setRandomCountry(randomNumber);
         paintByName(svgRef.current, countries[randomNumber].name, "red");
     }
@@ -97,9 +98,7 @@ export default function Quiz() {
                 </button>
             </div>
 
-            <footer className="fixed bottom-0 w-full bg-neutral-800 px-4 py-2 text-white flex justify-center z-50">
-                <p>{language == "pt" ? "feito por" : "made by"} Pedro Borges &copy; {new Date().getFullYear()}</p>
-            </footer>
+            <Footer language={language} />
         </div>
     )
 }

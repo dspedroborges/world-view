@@ -1,4 +1,4 @@
-import { BsCheck2Square, BsGithub, BsHouse, BsInfo, BsSearch } from "react-icons/bs";
+import { BsCheck2Square, BsHouse, BsInfo, BsSearch } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useLanguageStore } from "../stores/language";
 import { useState } from "react";
@@ -66,12 +66,6 @@ export default function Nav(
                     <Link to="/quiz" className="flex items-center gap-1">
                         <BsCheck2Square />
                         Quiz
-                    </Link>
-                </li>
-                <li className="cursor-pointer hover:underline">
-                    <Link to="https://github.com/dspedroborges/world-view" target="_blank" className="flex items-center gap-1">
-                        <BsGithub />
-                        Github
                     </Link>
                 </li>
                 <li>

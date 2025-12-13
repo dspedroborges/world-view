@@ -11,6 +11,7 @@ import Card from "../components/Card";
 import Nav from "../components/Nav";
 import { getListOfCountries } from "../functions/misc";
 import { useLanguageStore } from "../stores/language";
+import Footer from "../components/Footer";
 
 export default function Home() {
   const svgRef = useRef<SVGSVGElement | null>(null);
@@ -104,9 +105,7 @@ export default function Home() {
           />
         )
       }
-      <footer className="fixed bottom-0 w-full bg-neutral-800 px-4 py-2 text-white flex justify-center z-50">
-        <p>{language == "pt" ? "feito por" : "made by"} Pedro Borges &copy; {new Date().getFullYear()}</p>
-      </footer>
+      <Footer language={language} />
     </div>
   )
 }
