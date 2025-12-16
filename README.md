@@ -17,14 +17,6 @@ The project is still in development and the next updates are directed to the fol
 - [ ] Highlight regions and subregions
 - [x] Quiz mode
 
-## Prerequisites
-
-Before getting started, make sure you meet the following requirements for a Node.js project:
-
-- You have the latest LTS version of Node.js and npm installed.
-- You are using a compatible operating system (Windows, Linux, or macOS). All three are supported.
-- You have read the relevant project documentation or setup guide.
-
 ## Installing it
 
 To install it, follow these steps:
