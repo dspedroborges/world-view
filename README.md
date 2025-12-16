@@ -10,7 +10,20 @@
 
 > World View is an web app that uses LLM and allows the user to learn about the countries of the world by clicking on their position on the map.
 
-### Adjustments and improvements
+## Techs
+
+- React
+- React DOM
+- React Router DOM
+- React Query (@tanstack/react-query)
+- Tailwind CSS
+- React Icons
+- Zustand
+- Sonner
+- Vite
+- TypeScript
+
+## Adjustments and improvements
 
 The project is still in development and the next updates are directed to the following tasks:
 
