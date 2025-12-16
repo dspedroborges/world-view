@@ -12,15 +12,12 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.17",
     "@tanstack/react-query": "^5.90.12",
-    "@tonejs/midi": "^2.0.28",
-    "midi-sounds-react": "^1.2.54",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.10.1",
     "sonner": "^2.0.7",
     "tailwindcss": "^4.1.17",
-    "tone": "^15.1.22",
     "zustand": "^5.0.9"
   },
   "devDependencies": {
