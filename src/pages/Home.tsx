@@ -77,8 +77,6 @@ export default function Home() {
       <Nav
         setCountryName={setCountryName}
         dataList={getListOfCountries()}
-        setShowInfo={setShowInfo}
-        showInfo={showInfo}
       />
 
       <ZoomableSvg>
