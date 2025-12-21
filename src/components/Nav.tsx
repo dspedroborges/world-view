@@ -24,11 +24,11 @@ export default function Nav(
                             e.preventDefault();
                             setCountryName(searchParam);
                         }}>
-                            <div className="bg-white text-black rounded-xl p-2 flex items-center gap-2">
+                            <div className="bg-white text-black p-2 flex items-center gap-2">
                                 <BsSearch />
                                 <input
                                     type="text"
-                                    className="focus:outline-0 text-center"
+                                    className="focus:outline-0"
                                     placeholder={`${language == "pt" ? "Ache um país..." : "Find a country..."}`}
                                     list="countries-list"
                                     onChange={(e) => setSearchParam(e.target.value)}
