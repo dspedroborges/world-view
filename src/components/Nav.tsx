@@ -1,14 +1,12 @@
-import { BsCheck2Square, BsHouse, BsSearch } from "react-icons/bs";
+import { BsCheck2Square, BsHouse } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useLanguageStore } from "../stores/language";
-import { useState } from "react";
 import Select from "./Select";
 
 export default function Nav(
     { setCountryName, countryName, dataList }:
         { setCountryName: Function, countryName?: string, dataList: string[] }
 ) {
-    const [searchParam, setSearchParam] = useState("");
     const language = useLanguageStore((s) => s.language);
     const setLanguage = useLanguageStore((s) => s.setLanguage);
 
