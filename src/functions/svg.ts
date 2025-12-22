@@ -63,6 +63,6 @@ export const handleSvgClick = async (e: React.MouseEvent<SVGSVGElement>, svg: SV
   const key = name ?? className ?? id;
   if (!key) return;
 
-  paintByName(svg, key, "green");
+  paintByName(svg, key, "teal");
   recall(key);
 };
