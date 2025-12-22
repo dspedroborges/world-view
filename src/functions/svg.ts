@@ -1,34 +1,50 @@
-export function paintByName(svg: SVGSVGElement, key: string, color: string) {
+export function paintByName(
+  svg: SVGSVGElement,
+  key: string,
+  color: string
+) {
+  if (!key || !key.trim()) return;
+
   svg.querySelectorAll("path").forEach(p => {
     p.setAttribute("fill", "lightgreen");
     p.setAttribute("stroke-width", ".2");
   });
 
-  const esc = CSS.escape(key);
+  const safe = CSS.escape(key.trim());
 
-  const byName = `path[name="${key}"]`;
-  const byTitle = `path[title="${key}"]`;
+  const byName = `path[name="${safe}"]`;
+  const byTitle = `path[title="${safe}"]`;
+  const byId = `path#${safe}`;
 
-  const byClass = `path${key
-    .split(/\s+/)
-    .map(c => "." + CSS.escape(c))
-    .join("")}`;
+  const classSelector =
+    key
+      .split(/\s+/)
+      .map(c => c.trim())
+      .filter(Boolean)
+      .map(c => "." + CSS.escape(c))
+      .join("");
 
-  const byId = `path#${esc}`;
+  const byClass = classSelector ? `path${classSelector}` : "";
 
   let selector = "";
 
-  if (svg.querySelectorAll(byName).length > 0) selector = byName;
-  else if (svg.querySelectorAll(byTitle).length > 0) selector = byTitle;
-  else if (svg.querySelectorAll(byClass).length > 0) selector = byClass;
-  else if (svg.querySelectorAll(byId).length > 0) selector = byId;
-  else {
-    console.log("Unable to find on SVG");
-    return;
+  const selectors = [byName, byTitle, byClass, byId];
+
+  for (const sel of selectors) {
+    if (!sel) continue;
+    try {
+      if (svg.querySelectorAll(sel).length > 0) {
+        selector = sel;
+        break;
+      }
+    } catch {
+      continue;
+    }
   }
 
-  const paths = svg.querySelectorAll(selector);
-  paths.forEach(p => {
+  if (!selector) return;
+
+  svg.querySelectorAll(selector).forEach(p => {
     p.setAttribute("fill", color);
     p.setAttribute("stroke-width", "2");
   });

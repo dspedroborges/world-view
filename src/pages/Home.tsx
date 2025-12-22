@@ -76,6 +76,7 @@ export default function Home() {
       }
       <Nav
         setCountryName={setCountryName}
+        countryName={countryName}
         dataList={getListOfCountries()}
       />
 
