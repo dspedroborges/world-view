@@ -64,8 +64,6 @@ export default function Quiz() {
             <Nav
                 setCountryName={setCountryName}
                 dataList={[]}
-                setShowInfo={() => ""}
-                showInfo={false}
             />
             <Toaster position="top-right" />
             <ZoomableSvg>
