@@ -11,7 +11,7 @@ export default function Nav(
     const setLanguage = useLanguageStore((s) => s.setLanguage);
 
     return (
-        <nav className="bg-neutral-800 px-4 py-2 text-white flex flex-col gap-4 md:gap-0 md:flex-row justify-between items-center fixed top-0 w-full z-50">
+        <nav className="bg-neutral-800 px-4 py-2 text-white flex flex-col gap-4 lg:gap-0 lg:flex-row justify-between items-center fixed top-0 w-full z-50">
             <h1 className="font-bold flex items-center gap-1 text-xl">
                 <img src="icon.png" className="w-4" />
                 World View

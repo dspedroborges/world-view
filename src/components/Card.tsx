@@ -53,7 +53,7 @@ export default function Card({
     comment,
 }: CardProps) {
     return (
-        <div className="fixed top-1/2 lg:top-1/2 -translate-y-1/2 h-2/3 overflow-y-scroll border-4 lg:left-2 bg-neutral-200/80 shadow-2xl w-full md:w-[350px] text-neutral-800 rounded-b-xl">
+        <div className="fixed top-[25%] left-1/2 -translate-x-1/2 lg:translate-x-0 lg:top-1/2 lg:-translate-y-1/2 h-2/3 overflow-y-scroll border-4 lg:left-2 bg-neutral-200/80 shadow-2xl w-[95%] md:w-[350px] text-neutral-800 rounded-b-xl">
             <div className="p-2 mb-4 bg-neutral-800 text-white w-full flex justify-center items-center sticky top-0 z-40">
                 <h3 className="text-center font-bold text-xl w-[90%]">Info</h3>
                 <BsXCircle
