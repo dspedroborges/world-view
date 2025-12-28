@@ -14,8 +14,19 @@ export default function ZoomableSvg({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    setOffset({ x: rect.width / 2, y: rect.height / 2 });
+
+    const container = containerRef.current;
+    const content = container.firstElementChild as HTMLElement;
+
+    if (!content) return;
+
+    const c = container.getBoundingClientRect();
+    const s = content.getBoundingClientRect();
+
+    setOffset({
+      x: c.width / 2 - s.width / 2,
+      y: c.height / 2 - s.height / 2,
+    });
   }, []);
 
   const clampScale = (v: number) => Math.max(0.3, Math.min(v, 8));
